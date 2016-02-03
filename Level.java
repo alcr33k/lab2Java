@@ -1,4 +1,3 @@
-
 package lab2.level;
 
 import java.util.Observable;
@@ -7,7 +6,7 @@ import lab2.level.Room;
 
 public class Level extends Observable {
 	//public Room[] rooms;
-	Room[] array = new Room[100];
+	Room[] rooms = new Room[100];
 	Room location = null;
 	int numRooms = 0;
   	public boolean place(Room r, int x, int y)  {
@@ -16,13 +15,15 @@ public class Level extends Observable {
 					if(!(((r.dy + y)<rooms[i].py) || (y > (rooms[i].py+rooms[i].dy)))){
 						return false;
 					}
-        	} // all ok, add room
+				}
+			}
+			// all ok, add room
        		r.px = x;
        		r.dx = y;
         	rooms[numRooms] = r;
         	numRooms++;
         	return true;
-    	}
+  	}
 	
 	public void firstLocation(Room r) {
 		// add here 
