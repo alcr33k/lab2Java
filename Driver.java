@@ -12,6 +12,10 @@ public class Driver {
 		Room room1 = new Room(1,1,Color.blue);
 		Room room2 = new Room(1,1,Color.blue);
 		Room room3 = new Room(1,1,Color.blue);
+       		Level lvl1 = new Level();
+        	lvl1.place(room1, 100, 200);
+        	lvl1.place(room2, 200, 100);
+        	lvl1.place(room3, 200, 200); // overlaps
 		room1.connectNorthTo(room2);
 		room2.connectSouthTo(room1);
 		room3.connectSouthTo(room2);		
