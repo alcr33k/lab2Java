@@ -10,7 +10,7 @@ public class Level extends Observable {
 	Room location = null;
 	int numRooms = 0;
   	public boolean place(Room r, int x, int y)  {
-	for(int i = 0; i < rooms.length; i++) { // check x-range
+	for(int i = 0; i < numRooms; i++) { // check x-range
 				if(!(((r.dx + x)<rooms[i].px) || (x > (rooms[i].px+rooms[i].dx)))){
 					if(!(((r.dy + y)<rooms[i].py) || (y > (rooms[i].py+rooms[i].dy)))){
 						return false;
