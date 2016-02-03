@@ -73,16 +73,20 @@ public class LevelGUI implements Observer {
 		private void paintConnections(Graphics g, Room r){
 			g.setColor(Color.black);
 			if(r.north != null){
-				g.drawLine((r.px+((r.dx/2))-doorWidth), r.py,(r.px+((r.dx/2))+doorWidth) , r.py);
+				g.fillRect((r.px+((r.dx/2))-doorWidth), r.py, doorWidth*2, doorHeight);
+				//g.drawLine((r.px+((r.dx/2))-doorWidth), r.py,(r.px+((r.dx/2))+doorWidth) , r.py);
 			}
 			if(r.south != null){
-				g.drawLine((r.px+((r.dx/2))-doorWidth), r.py+r.dy, (r.px+((r.dx/2))+doorWidth), r.py+r.dy);
+				g.fillRect((r.px+((r.dx/2))-doorWidth), r.py+r.dy-doorHeight, doorWidth*2, doorHeight);
+				//g.drawLine((r.px+((r.dx/2))-doorWidth), r.py+r.dy, (r.px+((r.dx/2))+doorWidth), r.py+r.dy);
 			}
 			if(r.east != null){
-				g.drawLine(r.dx+r.px, (r.py+((r.dy/2))-doorWidth), r.dx+r.px, (r.py+((r.dy/2))+doorWidth));
+				g.fillRect(r.dx+r.px-doorHeight, (r.py+((r.dy/2))-doorWidth), doorHeight, doorWidth*2);
+				//g.drawLine(r.dx+r.px, (r.py+((r.dy/2))-doorWidth), r.dx+r.px, (r.py+((r.dy/2))+doorWidth));
 			}
 			if(r.west != null){
-				g.drawLine(r.px, (r.py+((r.dy/2))-doorWidth), r.px, (r.py+((r.dy/2))+doorWidth));
+				g.fillRect(r.px, (r.py+((r.dy/2))-doorWidth), doorHeight, doorWidth*2);
+				//g.drawLine(r.px, (r.py+((r.dy/2))-doorWidth), r.px, (r.py+((r.dy/2))+doorWidth));
 			}
 		}
 		
