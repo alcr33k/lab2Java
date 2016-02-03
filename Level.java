@@ -6,9 +6,10 @@ import java.util.Observable;
 import lab2.level.Room;
 
 public class Level extends Observable {
-	public Room[] rooms;
-	// Room[] array = new Room[100];
+	//public Room[] rooms;
+	Room[] array = new Room[100];
 	Room location = null;
+	int numRooms = 0;
   	public boolean place(Room r, int x, int y)  {
 	for(int i = 0; i < rooms.length; i++) { // check x-range
 				if(!(((r.dx + x)<rooms[i].px) || (x > (rooms[i].px+rooms[i].dx)))){
@@ -18,7 +19,8 @@ public class Level extends Observable {
         	} // all ok, add room
        		r.px = x;
        		r.dx = y;
-        	rooms[rooms.length-1] = r;
+        	rooms[numRooms] = r;
+        	numRooms++;
         	return true;
     	}
 	
