@@ -7,7 +7,7 @@ import lab2.Driver;
 
 
 public class Room {
-	int dx, dy;
+	int dx, dy, px, py;
 	Color color;
 	Room north, west, east, south = null;
 	
