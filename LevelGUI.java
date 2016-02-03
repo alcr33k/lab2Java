@@ -14,9 +14,11 @@ import javax.swing.JPanel;
 
 
 public class LevelGUI implements Observer {
-
+	
 	private Level lv;
 	private Display d;
+	private int doorWidth = 20;
+	private int levelSize = 1000;
 	
 	public LevelGUI(Level level, String name) {
 		
@@ -27,17 +29,18 @@ public class LevelGUI implements Observer {
 		
 		// TODO: You should change 200 to a value 
 		// depending on the size of the level
-		d = new Display(lv,200,200);
+		d = new Display(lv,levelSize,levelSize);
 		
 		frame.getContentPane().add(d);
 		frame.pack();
 		frame.setLocation(0,0);
 		frame.setVisible(true);
+		lv.addObserver(this);
 	}
 	
 	
 	public void update(Observable arg0, Object arg1) {
-		
+		d.repaint();
 	}
 	
 	private class Display extends JPanel {
@@ -48,7 +51,7 @@ public class LevelGUI implements Observer {
 			
 			addKeyListener(new Listener());
 			
-			setBackground(Color.GREEN);
+			setBackground(Color.white);
 			setPreferredSize(new Dimension(x+20,y+20));
 			setFocusable(true);
 		}
@@ -57,7 +60,31 @@ public class LevelGUI implements Observer {
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
+			for(int i = 0; i<lv.numRooms; i++){
+				g.setColor(lv.array[i].color);
+				g.fillRect(lv.array[i].px, lv.array[i].py, lv.array[i].dx, lv.array[i].dy);
+				if(lv.array[i] == lv.location){
+					g.setColor(Color.red);
+					g.drawRect(lv.array[i].px, lv.array[i].py, lv.array[i].dx, lv.array[i].dy);
+				}
+				paintConnections(g, lv.array[i]);
+			}
 			
+		}
+		private void paintConnections(Graphics g, Room r){
+			g.setColor(Color.black);
+			if(r.north != null){
+				g.drawLine((r.px+((r.dx/2))-doorWidth), r.py,(r.px+((r.dx/2))+doorWidth) , r.py);
+			}
+			if(r.south != null){
+				g.drawLine((r.px+((r.dx/2))-doorWidth), r.py+r.dy, (r.px+((r.dx/2))+doorWidth), r.py+r.dy);
+			}
+			if(r.east != null){
+				g.drawLine(r.dx+r.px, (r.py+((r.dy/2))-doorWidth), r.dx+r.px, (r.py+((r.dy/2))+doorWidth));
+			}
+			if(r.west != null){
+				g.drawLine(r.px, (r.py+((r.dy/2))-doorWidth), r.px, (r.py+((r.dy/2))+doorWidth));
+			}
 		}
 		
 
@@ -71,6 +98,12 @@ public class LevelGUI implements Observer {
 	 		}
 
 	 		public void keyTyped(KeyEvent event) {
+	 			switch (event.getKeyChar()) {
+	 			case 'w': lv.moveNorth(); break;
+	 			case 'a': lv.moveWest(); break;
+	 			case 's': lv.moveSouth(); break;
+	 			case 'd': lv.moveEast(); break;	
+	 			}
 	 		}
 	 	}
 
