@@ -19,7 +19,7 @@ public class Level extends Observable {
 			}
 			// all ok, add room
        		r.px = x;
-       		r.dx = y;
+       		r.py = y;
         	rooms[numRooms] = r;
         	numRooms++;
         	return true;
