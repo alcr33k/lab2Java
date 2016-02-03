@@ -1,4 +1,3 @@
-
 package lab2.level;
 
 import java.awt.Color;
@@ -7,7 +6,7 @@ import lab2.Driver;
 
 
 public class Room {
-	int dx, dy, px, py;
+	int dx, dy, px, py; // height, width, positionx, positiony
 	Color color;
 	Room north, west, east, south = null;
 	
