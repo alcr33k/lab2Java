@@ -31,3 +31,34 @@ public class Level extends Observable {
 	}
 	
 }
+	void moveEast(){
+		if(location.east != null){
+			location = location.east;
+			changedPlace();
+		}
+	}
+	void moveWest(){
+		if(location.west != null){
+			location = location.west;
+			changedPlace();
+		}
+	}
+	void moveNorth(){
+		if(location.north != null){
+			location = location.north;
+			changedPlace();
+		}
+	}
+	void moveSouth(){
+		if(location.south != null){
+			location = location.south;
+			changedPlace();
+		}
+	}
+	
+	private void changedPlace(){
+		setChanged();
+		notifyObservers();
+	}
+ 
+}
