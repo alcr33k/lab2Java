@@ -1,4 +1,3 @@
-
 package lab2.level;
 
 import java.awt.Color;
@@ -60,14 +59,14 @@ public class LevelGUI implements Observer {
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			for(int i = 0; i<lv.numRooms; i++){
-				g.setColor(lv.array[i].color);
-				g.fillRect(lv.array[i].px, lv.array[i].py, lv.array[i].dx, lv.array[i].dy);
-				if(lv.array[i] == lv.location){
+			for(int i = 0; i<lv.numRooms; i++){ // längen på arrayn
+				g.setColor(lv.rooms[i].color); // rename to what we change to
+				g.fillRect(lv.rooms[i].px, lv.rooms[i].py, lv.rooms[i].dx, lv.rooms[i].dy);
+				if(lv.rooms[i] == lv.location){
 					g.setColor(Color.red);
-					g.drawRect(lv.array[i].px, lv.array[i].py, lv.array[i].dx, lv.array[i].dy);
+					g.drawRect(lv.rooms[i].px, lv.rooms[i].py, lv.rooms[i].dx, lv.rooms[i].dy);
 				}
-				paintConnections(g, lv.array[i]);
+				paintConnections(g, lv.rooms[i]);
 			}
 			
 		}
@@ -99,10 +98,10 @@ public class LevelGUI implements Observer {
 
 	 		public void keyTyped(KeyEvent event) {
 	 			switch (event.getKeyChar()) {
-	 			case 'w': lv.moveNorth(); break;
+	 		/*	case 'w': lv.moveNorth(); break; // senare grej
 	 			case 'a': lv.moveWest(); break;
 	 			case 's': lv.moveSouth(); break;
-	 			case 'd': lv.moveEast(); break;	
+	 			case 'd': lv.moveEast(); break;	*/
 	 			}
 	 		}
 	 	}
