@@ -11,14 +11,14 @@ public class Level extends Observable {
 	Room location = null;
   	public boolean place(Room r, int x, int y)  {
 	for(int i = 0; i < rooms.length; i++) { // check x-range
-          	if((x > rooms[i].px) && (x < rooms[i].px)) {
+          	if ((x > rooms[i].px) && (x < (rooms[i].px + rooms[i].dx))) {
           	      return false;
             	}
         	}
        		for(int i = 0; i < rooms.length; i++) { // check y-range
-       	     		if((y > rooms[i].py) && (y < rooms[i].py)) {
+       	     		if ((y > rooms[i].py) && (y < (rooms[i].py + rooms[i].dy))) {
         	        	return false;
-        	  	 }
+       	     		}
         	} // all ok, add room
        		r.px = x;
        		r.dx = y;
