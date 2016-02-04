@@ -59,18 +59,18 @@ public class LevelGUI implements Observer {
 	
 		
 		/*
-		 * go through array and pain room, when we find location, paint a red box in that room.
+		 * go through vector and pain room, when we find location, paint a red box in that room.
 		 */
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			for(int i = 0; i<lv.numRooms; i++){
-				g.setColor(lv.array.get(i).color);
-				g.fillRect(lv.array.get(i).px, lv.array.get(i).py, lv.array.get(i).dx, lv.array.get(i).dy);
-				if(lv.array.get(i) == lv.location){
+				g.setColor(lv.vector.get(i).color);
+				g.fillRect(lv.vector.get(i).px, lv.vector.get(i).py, lv.vector.get(i).dx, lv.vector.get(i).dy);
+				if(lv.vector.get(i) == lv.location){
 					g.setColor(Color.red);
 					g.fillRect((lv.location.px+((lv.location.dx/2))-doorWidth), (lv.location.py+((lv.location.dy/2))-doorWidth), doorWidth*2, doorWidth*2);
 				}
-				paintConnections(g, lv.array.get(i));
+				paintConnections(g, lv.vector.get(i));
 			}
 			
 			/*
