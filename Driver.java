@@ -29,7 +29,7 @@ public class Driver {
 		maze.place(room3, 202, 202);
 		maze.place(room4, 403, 202);
 		maze.place(room5, 202, 403);
-		//maze.place(room6, 0, 0);
+		maze.place(room6, 0, 0);
 		maze.firstLocation(room1);
 		new LevelGUI(maze, "fiskmas");
 	}
