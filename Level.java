@@ -1,36 +1,44 @@
+
 package lab2.level;
 
 import java.util.Observable;
 
-import lab2.level.Room;
+import lab2.Driver;
+
 
 public class Level extends Observable {
-	//public Room[] rooms;
-	Room[] rooms = new Room[100];
-	Room location = null;
+	Room[] array = new Room[100];
 	int numRooms = 0;
-  	public boolean place(Room r, int x, int y)  {
-	for(int i = 0; i < numRooms; i++) { // check x-range
-				if(!(((r.dx + x)<rooms[i].px) || (x > (rooms[i].px+rooms[i].dx)))){
-					if(!(((r.dy + y)<rooms[i].py) || (y > (rooms[i].py+rooms[i].dy)))){
+	Room location = null;
+	
+	public Level(){
+	}
+	/*
+	 * Place room in an array, check to see if the newly placed room is going to fit over another room on the map.
+	 */
+	public boolean place(Room r, int x, int y) {
+			for(int i = 0; i<numRooms; i++){
+				if(!(((r.dx + x)<array[i].px) || (x > (array[i].px+array[i].dx)))){
+					if(!(((r.dy + y)<array[i].py) || (y > (array[i].py+array[i].dy)))){
 						return false;
 					}
 				}
 			}
-			// all ok, add room
-       		r.px = x;
-       		r.py = y;
-        	rooms[numRooms] = r;
-        	numRooms++;
-        	return true;
-  	}
-	
-	public void firstLocation(Room r) {
-		// add here 
-		location = r;
+			array[numRooms] = r;
+			r.px = x;
+			r.py = y;
+			numRooms++;
+			return true;
 	}
-	
-}
+	/*
+	 * Set first location.
+	 */
+	public void firstLocation(Room r) {
+			location = r;
+	}
+	/*
+	 * move to another room if possible, also set changed and notify observers in changedPlace.
+	 */
 	void moveEast(){
 		if(location.east != null){
 			location = location.east;
