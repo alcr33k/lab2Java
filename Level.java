@@ -2,12 +2,14 @@
 package lab2.level;
 
 import java.util.Observable;
+import java.util.Vector;
 
 import lab2.Driver;
 
 
 public class Level extends Observable {
-	Room[] array = new Room[100];
+	Vector<Room> array = new Vector<Room>();
+	//Room[] array = new Room[100];
 	int numRooms = 0;
 	Room location = null;
 	
@@ -18,15 +20,15 @@ public class Level extends Observable {
 	 */
 	public boolean place(Room r, int x, int y) {
 			for(int i = 0; i<numRooms; i++){
-				if(!(((r.dx + x)<array[i].px) || (x > (array[i].px+array[i].dx)))){
-					if(!(((r.dy + y)<array[i].py) || (y > (array[i].py+array[i].dy)))){
+				if(!(((r.dx + x)<array.get(i).px) || (x > (array.get(i).px+array.get(i).dx)))){
+					if(!(((r.dy + y)<array.get(i).py) || (y > (array.get(i).py+array.get(i).dy)))){
 						return false;
 					}
 				}
 			}
-			array[numRooms] = r;
 			r.px = x;
 			r.py = y;
+			array.add(r);
 			numRooms++;
 			return true;
 	}
