@@ -64,13 +64,13 @@ public class LevelGUI implements Observer {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			for(int i = 0; i<lv.numRooms; i++){
-				g.setColor(lv.array[i].color);
-				g.fillRect(lv.array[i].px, lv.array[i].py, lv.array[i].dx, lv.array[i].dy);
-				if(lv.array[i] == lv.location){
+				g.setColor(lv.array.get(i).color);
+				g.fillRect(lv.array.get(i).px, lv.array.get(i).py, lv.array.get(i).dx, lv.array.get(i).dy);
+				if(lv.array.get(i) == lv.location){
 					g.setColor(Color.red);
 					g.fillRect((lv.location.px+((lv.location.dx/2))-doorWidth), (lv.location.py+((lv.location.dy/2))-doorWidth), doorWidth*2, doorWidth*2);
 				}
-				paintConnections(g, lv.array[i]);
+				paintConnections(g, lv.array.get(i));
 			}
 			
 			/*
