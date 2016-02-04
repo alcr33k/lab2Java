@@ -1,3 +1,4 @@
+
 package lab2.level;
 
 import java.awt.Color;
@@ -6,7 +7,7 @@ import lab2.Driver;
 
 
 public class Room {
-	int dx, dy, px, py; // height, width, positionx, positiony
+	int dx, dy, px, py;
 	Color color;
 	Room north, west, east, south = null;
 	
@@ -15,7 +16,9 @@ public class Room {
 		this.dy = dy;
 		this.color = color;
 	}
-
+/*
+ * connect a room to another room in a direction.
+ */
 	public void connectNorthTo(Room r) {
 		this.north = r;
 	}
