@@ -1,3 +1,4 @@
+
 package lab2.level;
 
 import java.awt.Color;
@@ -17,6 +18,7 @@ public class LevelGUI implements Observer {
 	private Level lv;
 	private Display d;
 	private int doorWidth = 20;
+	private int doorHeight = 10;
 	private int levelSize = 1000;
 	
 	public LevelGUI(Level level, String name) {
@@ -26,8 +28,6 @@ public class LevelGUI implements Observer {
 		JFrame frame = new JFrame(name);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		// TODO: You should change 200 to a value 
-		// depending on the size of the level
 		d = new Display(lv,levelSize,levelSize);
 		
 		frame.getContentPane().add(d);
@@ -37,7 +37,9 @@ public class LevelGUI implements Observer {
 		lv.addObserver(this);
 	}
 	
-	
+	/*
+	 * update will repaint and call paintComponent every time we notify observers.
+	 */
 	public void update(Observable arg0, Object arg1) {
 		d.repaint();
 	}
@@ -56,19 +58,24 @@ public class LevelGUI implements Observer {
 		}
 	
 		
-		
+		/*
+		 * go through array and pain room, when we find location, paint a red box in that room.
+		 */
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			for(int i = 0; i<lv.numRooms; i++){ // längen på arrayn
-				g.setColor(lv.rooms[i].color); // rename to what we change to
-				g.fillRect(lv.rooms[i].px, lv.rooms[i].py, lv.rooms[i].dx, lv.rooms[i].dy);
-				if(lv.rooms[i] == lv.location){
+			for(int i = 0; i<lv.numRooms; i++){
+				g.setColor(lv.array[i].color);
+				g.fillRect(lv.array[i].px, lv.array[i].py, lv.array[i].dx, lv.array[i].dy);
+				if(lv.array[i] == lv.location){
 					g.setColor(Color.red);
-					g.drawRect(lv.rooms[i].px, lv.rooms[i].py, lv.rooms[i].dx, lv.rooms[i].dy);
+					g.fillRect((lv.location.px+((lv.location.dx/2))-doorWidth), (lv.location.py+((lv.location.dy/2))-doorWidth), doorWidth*2, doorWidth*2);
 				}
-				paintConnections(g, lv.rooms[i]);
+				paintConnections(g, lv.array[i]);
 			}
 			
+			/*
+			 * paint the doors, paint a door on each square if there is a opening in that direction.
+			 */
 		}
 		private void paintConnections(Graphics g, Room r){
 			g.setColor(Color.black);
@@ -90,7 +97,9 @@ public class LevelGUI implements Observer {
 			}
 		}
 		
-
+		/*
+		 * check key typed if it is a special char, w,a,s,d then we move in that direction.
+		 */
 	 	private class Listener implements KeyListener {
 
 	 		
@@ -102,10 +111,10 @@ public class LevelGUI implements Observer {
 
 	 		public void keyTyped(KeyEvent event) {
 	 			switch (event.getKeyChar()) {
-	 		/*	case 'w': lv.moveNorth(); break; // senare grej
+	 			case 'w': lv.moveNorth(); break;
 	 			case 'a': lv.moveWest(); break;
 	 			case 's': lv.moveSouth(); break;
-	 			case 'd': lv.moveEast(); break;	*/
+	 			case 'd': lv.moveEast(); break;	
 	 			}
 	 		}
 	 	}
