@@ -8,27 +8,27 @@ import lab2.Driver;
 
 
 public class Level extends Observable {
-	Vector<Room> array = new Vector<Room>();
-	//Room[] array = new Room[100];
+	Vector<Room> vector = new Vector<Room>();
+	//Room[] vector = new Room[100];
 	int numRooms = 0;
 	Room location = null;
 	
 	public Level(){
 	}
 	/*
-	 * Place room in an array, check to see if the newly placed room is going to fit over another room on the map.
+	 * Place room in an vector, check to see if the newly placed room is going to fit over another room on the map.
 	 */
 	public boolean place(Room r, int x, int y) {
 			for(int i = 0; i<numRooms; i++){
-				if(!(((r.dx + x)<array.get(i).px) || (x > (array.get(i).px+array.get(i).dx)))){
-					if(!(((r.dy + y)<array.get(i).py) || (y > (array.get(i).py+array.get(i).dy)))){
+				if(!(((r.dx + x)<vector.get(i).px) || (x > (vector.get(i).px+vector.get(i).dx)))){
+					if(!(((r.dy + y)<vector.get(i).py) || (y > (vector.get(i).py+vector.get(i).dy)))){
 						return false;
 					}
 				}
 			}
 			r.px = x;
 			r.py = y;
-			array.add(r);
+			vector.add(r);
 			numRooms++;
 			return true;
 	}
